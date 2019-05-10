@@ -1,0 +1,20 @@
+<div class="container-fluid">
+  <h1 class="text-center my-5">Adding group</h1>
+  <form [formGroup]="angularForm" (ngSubmit)="submit(this.angularForm)">
+    <div class="border border-info w-50 m-auto my-5 p-5">
+      <label for="facultyName">Faculty name</label>
+      <select id="facultyName" class="form-control mb-5" name="facultyName" formControlName="facultyId"> 
+          <option *ngFor="let item of serviceVar.facultyList" [value]="item.id"> {{item.name}}</option> 
+      </select>
+      <label for="groupName">Group name</label>
+      <input id="groupName" class="form-control" type="text" formControlName="groupName">
+      <div *ngIf="angularForm.controls['groupName'].invalid && angularForm.controls['groupName'].touched " class="alert alert-danger">
+          Group name is required and should contain at least 4 simbols. 
+      </div>
+      <div class="float-right my-5">
+        <button class="btn btn-success mr-3" type='submit'>Add</button>
+        <button routerLink="/dashboard" class="btn btn-danger" type='submit'>Cancel</button>
+      </div>
+    </div>
+  </form>
+</div> 

@@ -1,0 +1,66 @@
+<h1 class="text-center">Edit this student information </h1>
+<div class="card">
+  <div class="card-body">
+    <form [formGroup]="angularForm" (ngSubmit)="changeStudentObject(currentId)" novalidate>
+      <div class="form-group">
+        <label for="name" class="col-md-4">Student Name</label>
+        <input type="text"  class="form-control" id="name" name="name" formControlName="studentName">
+      </div>
+      <div *ngIf="angularForm.controls['studentName'].invalid && (angularForm.controls['studentName'].dirty || angularForm.controls['studentName'].touched)" class="alert alert-danger">
+        <div *ngIf="angularForm.controls['studentName'].errors.required">
+          Student Name is required.
+        </div> 
+      </div>
+      <div class="form-group">
+        <label for="lastName" class="col-md-4">Student Last Name</label>
+        <input type="text" class="form-control" id="lastName" name="lastName" formControlName="lastName">
+      </div>
+      <div *ngIf="angularForm.controls['lastName'].invalid && (angularForm.controls['lastName'].dirty || angularForm.controls['lastName'].touched)" class="alert alert-danger">
+        <div *ngIf="angularForm.controls['lastName'].errors.required">
+          Student Last Name is required.
+        </div>
+      </div>
+      <div class="form-group">
+        <label for="phone" class="col-md-4">Phone</label>
+        <input type="tel"  class="form-control" id="phone" name="phone" formControlName="phone" pattern="[0-9]{5,9}"> 
+      </div>
+      <div *ngIf="angularForm.controls['phone'].invalid && (angularForm.controls['phone'].dirty || angularForm.controls['phone'].touched)">
+        <div *ngIf="angularForm.controls['phone'].errors.required"  class="alert alert-danger">
+          Student Phone is required.
+        </div>
+         <div *ngIf="angularForm.controls['phone'].errors.pattern" class="alert alert-warning">Student Phone should contain only numbers and have at least 5 simbols</div>
+      </div>
+ 
+      <div class="form-group">
+        <label for="faculty" class="col-md-4">Faculty </label>
+        <select class="form-control" id="faculty" formControlName="faculty" (change)='getGroups()'> 
+          <option  *ngFor="let item of serviceVar.facultyList"  [ngValue]="item.name">{{item.name}}</option>
+        </select>
+      </div>  
+      <div class="form-group">
+        <label for="group" class="col-md-4">Groups </label>
+        <select class="form-control"  id="group" formControlName="group">
+          <option *ngFor="let item of curentFacGroups" [ngValue]="item">{{item}}</option>
+        </select>
+      </div>
+      <div class="form-group">  
+        <label for="course" class="col-md-4">Course </label>
+        <select class="form-control" id="course" formControlName="course">
+            <option value="1">1</option>
+            <option value="2">2</option>
+            <option value="3">3</option> 
+            <option value="4">4</option>
+            <option value="5">5</option> 
+        </select>
+      </div>
+      <div class="form-group">
+        <label class="col-md-4">Add your foto</label>
+        <input type="file"  accept="image" class="form-control" name="foto" > 
+      </div>
+      <div class="form-group float-right">
+        <button type="submit" class="btn btn-success mr-2" >Save changes</button>
+        <button routerLink='aaaaaaa' class="btn btn-danger" >Cancel</button>
+      </div>
+    </form>
+  </div>
+</div> 

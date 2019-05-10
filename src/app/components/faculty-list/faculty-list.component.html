@@ -1,0 +1,22 @@
+<div class="container-fluid">
+    <h1 class=" my-5 text-center h3 text-gray-800">Welcome to our university faculties page !!!</h1>
+
+    <table class="table table-hover">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Faculty Name</th>
+                <th>Groups</th>
+                <th><a routerLink="/add_faculty"><i class=" fa fa-plus-circle"></i> Add Faculty</a></th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let item of serviceVar.facultyList">
+                <td>{{item.id}}</td>
+                <td>{{item.name}}</td>
+                <td><span *ngFor="let groups of item.groups">{{groups.name}}, </span></td>
+                <td><button (click)='removing(item.id)' class="btn btn-danger">Delete</button></td>
+            </tr>
+        </tbody>
+    </table>
+</div>  

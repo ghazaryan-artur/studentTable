@@ -1,0 +1,129 @@
+<div id="page-top" class="w-100" >
+      <!-- Main Content -->
+      
+        <!-- Begin Page Content -->
+        <div class="container-fluid">
+
+          <!-- Page Heading -->
+          <h1 class="h3 my-2 text-gray-800">Our students - our pride</h1>
+          
+          <!-- DataTales Example -->
+          <div class="card shadow mb-4">
+            <div class="card-header py-3 justify-content-between d-flex">
+              <h6 class="m-0 font-weight-bold text-primary">Students roster</h6>
+              <a routerLink="/add_student" class="float-right"><i class=" fa fa-plus-circle"></i> Create</a>
+            </div>
+            <div class="card-body">
+              <div class="table-responsive">
+                <table class="table table-bordered" id="dataTable" cellspacing="0">
+                  <thead>
+                    <tr> 
+                      <th  id='id' class='setOpacityA' (click)="sorting('id')">ID  </th>
+                      <th id='name' (click)="sorting('name')">Name</th> 
+                      <th id='lastName' (click)="sorting('lastName')">Last name</th>
+                      <th id='phone' (click)="sorting('phone')">Phone </th>
+                      <th>Foto</th>
+                      <th id='faculty' (click)="sorting('faculty')">Faculty</th>
+                      <th id='group' (click)="sorting('group')">Group</th> 
+                      <th id='course' (click)="sorting('course')">Course</th> 
+                    </tr> 
+                  </thead>
+                  <tfoot>
+                    <tr>
+                      <th>ID</th>
+                      <th>Name</th>
+                      <th>Last name</th>
+                      <th>Phone</th>
+                      <th>Foto</th>
+                      <th>Faculty</th>
+                      <th>Group</th>
+                      <th>Course</th>
+                    </tr>
+                  </tfoot>
+                  <tbody>
+                    <tr>
+                      <td></td>
+                      <td><input class="form-control" name="name" [(ngModel)]="searchObj.name" (keyup)="searching('name', this.searchObj.name)" (search)="searching('name', this.searchObj.name)" type="search"></td>
+                      <td><input class="form-control" name="lastName" [(ngModel)]="searchObj.lastName" (keyup)="searching('lastName', this.searchObj.lastName)" (search)="searching('lastName', this.searchObj.lastName)" type="search"></td>
+                      <td><input class="form-control" name="phone" [(ngModel)]="searchObj.phone" (keyup)="searching('phone', this.searchObj.phone)" (search)="searching('phone', this.searchObj.phone)" type="search"></td>
+                      <td></td> 
+                      <td><input class="form-control" name="faculty" [(ngModel)]="searchObj.faculty" (keyup)="searching('faculty', this.searchObj.faculty)" (search)="searching('faculty', this.searchObj.faculty)" type="search"></td>
+                      <td><input class="form-control" name="group" [(ngModel)]="searchObj.group" (keyup)="searching('group', this.searchObj.group)" (search)="searching('group', this.searchObj.group)" type="search"></td>
+                      <td>
+                        <select class="form-control" name="course" [(ngModel)]="searchObj.course"   (change)="searching2('course', searchObj.course)">
+                          <option value="1">1</option>
+                          <option value="2">2</option>
+                          <option value="3">3</option> 
+                          <option value="4">4</option>
+                        </select>
+                      </td>
+                    </tr>
+                    <ng-container *ngFor='let person of serviceVar.studentsData'>
+                      <tr *ngIf='person.shownStatus'> 
+                        <td>
+                          <span class="mx-3">{{person.id}}</span> 
+                          <button class="btn btn-secondary btn-sm" (click)="sendStudentData(person.id)">Edit</button>
+                          <button type="button" data-toggle="modal" (click)='removedId(person.id)' data-target="#Modal" class="btn btn-danger btn-sm">Delete</button>
+                        </td>
+                        <td>{{person.name}}</td> 
+                        <td>{{person.lastName}}</td>
+                        <td>+{{person.phone}}</td>
+                        <td><img [src]="person.foto" [alt]='person.name' style="width: 60px; height:60px; "></td>
+                        <td>{{person.faculty}}</td>
+                        <td>{{person.group}}</td> 
+                        <td>{{person.course}}</td>
+                      </tr>
+                    </ng-container>
+
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+          
+        </div>
+
+
+
+      <!-- Footer -->
+      <footer class="sticky-footer bg-white">
+        <div class="container my-auto">
+          <div class="copyright text-center my-auto">
+            <span>Copyright &copy; Your Website 2019</span>
+          </div>
+        </div>
+      </footer>
+      <!-- End of Footer -->
+
+
+  </div>
+  <!-- End of Page Wrapper -->
+
+  <!-- Scroll to Top Button-->
+  <a class="scroll-to-top rounded" (click)="topFunction()">
+    <i class="fa fa-angle-up"></i>
+  </a>
+
+
+
+      <!--Delete Button Modal-->
+
+<div class="modal fade" id="Modal" tabindex="-1" role="dialog" aria-labelledby="ModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="ModalLabel">Student data removing</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <b>Are you sure?</b>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">No, get back</button>
+        <button type="button" class="btn btn-primary" data-dismiss="modal" (click)="removing(this.studentToDeleteId)">Confirm</button>
+      </div>
+    </div>
+  </div>
+</div>  
